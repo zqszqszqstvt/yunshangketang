@@ -49,15 +49,21 @@ const routes = [
       content:LoginS
     }
   },
-    {
+  {
   path:'/choose',
   components:{
     content:Choose
   }
-},
+  },
+  // {
+  //   path:'/',
+  //   redirect:'/postRecom'
+  // },
   {
     path:'/',
-    redirect:'/postRecom'
+    components:{
+      content:PostRecom
+    }
   },
   {
     path: '/login',
@@ -212,11 +218,11 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to,from,next)=>{
-  if(to.path!=='/registerS'&&to.path!=='/choose'&&to.path!=='/enterLoginS'&&to.path!=='/enterLogin' &&to.path!=='/register' && localStorage.getItem("user")===null){//登录成功
-    next('/choose');
-  }else{
-    next();
-  }
-})
+// router.beforeEach((to,from,next)=>{
+//   if(to.path!=='/registerS'&&to.path!=='/choose'&&to.path!=='/enterLoginS'&&to.path!=='/enterLogin' &&to.path!=='/register' && localStorage.getItem("user")===null){//登录成功
+//     next('/choose');
+//   }else{
+//     next();
+//   }
+// })
 export default router
