@@ -1,7 +1,7 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import SecondClassLogin from '../views/SecondClassLogin.vue'
-import SecondClassJob from '../views/SecondClassJob.vue'
-import SecondClassTech from '../views/SecondClassTech.vue'
+import { createRouter, createWebHashHistory } from "vue-router";
+import SecondClassLogin from "../views/SecondClassLogin.vue";
+import SecondClassJob from "../views/SecondClassJob.vue";
+import SecondClassTech from "../views/SecondClassTech.vue";
 import Contest from "@/components/Contest";
 import ContestDetail from "@/components/ContestDetail";
 import Login from "@/views/Login";
@@ -16,7 +16,7 @@ import PostRecom from "@/views/PostRecom";
 import DP from "@/views/DP";
 import Navigate from "@/components/Navigate";
 import App from "@/App";
-import {createWebHistory } from 'vue-router';
+import { createWebHistory } from "vue-router";
 import Help from "@/views/Help";
 import Direction from "@/views/Direction";
 import Project from "@/views/Project";
@@ -33,190 +33,205 @@ import recommendPost from "@/views/recommend/recommendPost";
 import recommendProject from "@/views/recommend/recommendProject";
 import recommendRecruit from "@/views/recommend/recommendRecruit";
 import Register from "@/views/Register";
-import Choose from"@/views/Choose";
+import Choose from "@/views/Choose";
 import LoginS from "@/views/LoginS";
 import RegisterS from "@/views/RegisterS";
+import HomePage from "@/views/home/index.vue";
+
 const routes = [
   {
-    path:'/registerS',
-    components:{
-      content:RegisterS
-    }
+    path: "/registerS",
+    components: {
+      content: RegisterS,
+    },
   },
   {
-    path:'/enterLoginS',
-    components:{
-      content:LoginS
-    }
+    path: "/enterLoginS",
+    components: {
+      content: LoginS,
+    },
   },
   {
-  path:'/choose',
-  components:{
-    content:Choose
-  }
-  },
-  // {
-  //   path:'/',
-  //   redirect:'/postRecom'
-  // },
-  {
-    path:'/',
-    components:{
-      content:PostRecom
-    }
+    path: "/choose",
+    components: {
+      content: Choose,
+    },
   },
   {
-    path: '/login',
-    name: 'SecondClassLogin',
-    component: SecondClassLogin
+    path:'/home',
+    components: {
+      content: HomePage,
+    },
   },
   {
-    path: '/SecondClassJob',
-    name: 'SecondClassJob',
-    components:{
+    path: "/",
+    components: {
+      content: PostRecom,
+    },
+  },
+  {
+    path: "/login",
+    name: "SecondClassLogin",
+    component: SecondClassLogin,
+  },
+  {
+    path: "/SecondClassJob",
+    name: "SecondClassJob",
+    components: {
       /*content:SecondClassJob*/
-      content:JobInfo
+      content: JobInfo,
     },
-    children:[
+    children: [
       {
-        path:'mustRead',
-        components:{
-          mustRead:JobRead
-        }
-      },{
-        path:'recruitInfo',
+        path: "mustRead",
         components: {
-          mustRead: RecruitInfo
-        }
-      },{
-        path:'companyInfo',
+          mustRead: JobRead,
+        },
+      },
+      {
+        path: "recruitInfo",
         components: {
-          mustRead:CompanyInfo
-        }
-      }
-    ]
+          mustRead: RecruitInfo,
+        },
+      },
+      {
+        path: "companyInfo",
+        components: {
+          mustRead: CompanyInfo,
+        },
+      },
+    ],
   },
   {
-    path: '/SecondClassTech',
-    name: 'SecondClassTech',
-    components:{
+    path: "/SecondClassTech",
+    name: "SecondClassTech",
+    components: {
       /*content:SecondClassTech*/
-      content:TechInfo
+      content: TechInfo,
     },
-    children:[
+    children: [
       {
-        path:'Course',
-        components:{
-          techContent:Course
-        }
-      },{
-        path:'Direction',
+        path: "Course",
         components: {
-          techContent:Direction
-        }
-      },{
-        path:'Project',
+          techContent: Course,
+        },
+      },
+      {
+        path: "Direction",
         components: {
-          techContent:Project
-        }
-      }
-    ]
+          techContent: Direction,
+        },
+      },
+      {
+        path: "Project",
+        components: {
+          techContent: Project,
+        },
+      },
+    ],
   },
   {
-    path:'/contest',
-    name:'Contest',
-    components:{
-      content:Contest
-    }
-  },{
-    path:'/detail',
-    name:'detail',
-    components:{
-      content:ContestDetail
-    }
+    path: "/contest",
+    name: "Contest",
+    components: {
+      content: Contest,
+    },
   },
   {
-    path:'/enterLogin',
-    components:{
-      content:Login
-    }
+    path: "/detail",
+    name: "detail",
+    components: {
+      content: ContestDetail,
+    },
+  },
+  {
+    path: "/enterLogin",
+    components: {
+      content: Login,
+    },
   },
 
   {
-    path:'/register',
-    components:{
-      content:Register
-    }
+    path: "/register",
+    components: {
+      content: Register,
+    },
   },
   {
-     path:'/userCenter',
-     components: {
-       content:userCenter
-     },
-    children:[
+    path: "/userCenter",
+    components: {
+      content: userCenter,
+    },
+    children: [
       {
-        path:'myInfo',
-        components:{
-          userCenter:myInfo
-        }
-      },{
-        path:'recommendContest',
-        components:{
-          userCenter:recommendContest
-        }
-      },{
-        path:'recommendCurriculum',
-        components:{
-          userCenter:recommendCurriculum
-        }
-      },{
-        path:'recommendPost',
-        components:{
-          userCenter:recommendPost
-        }
-      },{
-        path:'recommendProject',
-        components:{
-          userCenter:recommendProject
-        }
+        path: "myInfo",
+        components: {
+          userCenter: myInfo,
+        },
       },
       {
-        path:'recommendRecruit',
-        components:{
-          userCenter:recommendRecruit
-        }
-      }
-      ,{
-        path:'mySafe',
+        path: "recommendContest",
         components: {
-          userCenter:accountSafe
-        }
-      }
-    ]
-    },
+          userCenter: recommendContest,
+        },
+      },
+      {
+        path: "recommendCurriculum",
+        components: {
+          userCenter: recommendCurriculum,
+        },
+      },
+      {
+        path: "recommendPost",
+        components: {
+          userCenter: recommendPost,
+        },
+      },
+      {
+        path: "recommendProject",
+        components: {
+          userCenter: recommendProject,
+        },
+      },
+      {
+        path: "recommendRecruit",
+        components: {
+          userCenter: recommendRecruit,
+        },
+      },
+      {
+        path: "mySafe",
+        components: {
+          userCenter: accountSafe,
+        },
+      },
+    ],
+  },
   {
-    path:'/postRecom',
+    path: "/postRecom",
     components: {
-      content:PostRecom
-    }
-  },{
-    path:'/dp',
+      content: PostRecom,
+    },
+  },
+  {
+    path: "/dp",
     components: {
-      content:DP
-    }
-  },{
-     path:'/help',
-     components: {
-       content:Help
-     }
-  }
-]
+      content: DP,
+    },
+  },
+  {
+    path: "/help",
+    components: {
+      content: Help,
+    },
+  },
+];
 
 const routerHistory = createWebHistory();
 const router = createRouter({
   history: routerHistory,
-  routes
-})
+  routes,
+});
 
 // router.beforeEach((to,from,next)=>{
 //   if(to.path!=='/registerS'&&to.path!=='/choose'&&to.path!=='/enterLoginS'&&to.path!=='/enterLogin' &&to.path!=='/register' && localStorage.getItem("user")===null){//登录成功
@@ -225,4 +240,4 @@ const router = createRouter({
 //     next();
 //   }
 // })
-export default router
+export default router;
