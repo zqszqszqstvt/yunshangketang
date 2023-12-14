@@ -10,10 +10,27 @@
       <div
         v-for="nav in navList"
         :key="nav.code"
-        :class="['nav', { active: activeNav === nav.code }]"
+        :class="['nav', { active: activeNav.includes(nav.code) }]"
         @click="changeNav(nav.code)"
       >
         {{ nav.label }}
+        <img
+          v-if="['study', 'publish', 'self'].includes(nav.code)"
+          class="arrow"
+          :src="arrow"
+          alt=""
+        />
+        <div v-if="nav.children?.length" class="children">
+          <div
+            v-for="c in nav.children"
+            :key="c.label"
+            class="child"
+            @click.stop="changeNav(c.code)"
+          >
+            <img :src="c.img" alt="" />
+            {{ c.label }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -22,6 +39,15 @@
 <script>
 import logoImg from "@/assets/layout/logo.png";
 import titleImg from "@/assets/layout/title.png";
+import arrow from "@/assets/layout/arrow.png";
+import nav0201 from "@/assets/layout/nav0201.png";
+import nav0202 from "@/assets/layout/nav0202.png";
+import nav0301 from "@/assets/layout/nav0301.png";
+import nav0302 from "@/assets/layout/nav0302.png";
+import nav0303 from "@/assets/layout/nav0303.png";
+import nav0401 from "@/assets/layout/nav0401.png";
+import nav0402 from "@/assets/layout/nav0402.png";
+import nav0403 from "@/assets/layout/nav0403.png";
 export default {
   name: "HeaderBar",
   components: {},
@@ -30,6 +56,7 @@ export default {
     return {
       logoImg,
       titleImg,
+      arrow,
       activeNav: "home",
       navList: [
         {
@@ -39,14 +66,60 @@ export default {
         {
           label: "课程学习",
           code: "study",
+          children: [
+            {
+              label: "学院资源",
+              code: "study01",
+              img: nav0201,
+            },
+            {
+              label: "实训平台",
+              code: "study02",
+              img: nav0202,
+            },
+          ],
         },
         {
           label: "信息发布",
           code: "publish",
+          children: [
+            {
+              label: "考研保研",
+              code: "publish01",
+              img: nav0301,
+            },
+            {
+              label: "竞赛信息",
+              code: "publish02",
+              img: nav0302,
+            },
+            {
+              label: "招聘信息",
+              code: "publish03",
+              img: nav0303,
+            },
+          ],
         },
         {
           label: "能力自画像",
           code: "self",
+          children: [
+            {
+              label: "我的成绩",
+              code: "self01",
+              img: nav0401,
+            },
+            {
+              label: "我的课程",
+              code: "self02",
+              img: nav0402,
+            },
+            {
+              label: "我的竞赛",
+              code: "self03",
+              img: nav0403,
+            },
+          ],
         },
         {
           label: "登录/注册",
@@ -58,6 +131,7 @@ export default {
   methods: {
     changeNav(code) {
       this.activeNav = code;
+      console.log(code);
       // todo 页面跳转
     },
   },
@@ -114,6 +188,7 @@ export default {
       line-height: 22px;
       margin-left: 60px;
       transition: all ease-in-out 0.3s;
+      z-index: 100;
       &::after {
         content: none;
         position: absolute;
@@ -125,11 +200,52 @@ export default {
       }
       &:hover {
         font-weight: 600;
+        .arrow {
+          transform: rotate(180deg);
+        }
+        .children {
+          display: block;
+        }
       }
       &.active {
         font-weight: 600;
         &::after {
           content: "";
+        }
+      }
+      .arrow {
+        transition: all ease-in-out 0.3s;
+        margin-left: 4px;
+      }
+      .children {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: -30px;
+        padding: 14px 0;
+        width: 138px;
+        background-color: #fff;
+        border-radius: 0px 0px 10px 10px;
+        box-shadow: 0 0 5px #adadad50;
+        z-index: 10;
+        .child {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          padding: 12px 24px;
+          font-size: 16px;
+          font-family: PingFangSC, PingFang SC;
+          font-weight: 400;
+          color: #000000;
+          line-height: 22px;
+          word-break: keep-all;
+          img {
+            height: 19px;
+            margin-right: 9px;
+          }
+          &:hover {
+            background-color: #f4ecff;
+          }
         }
       }
     }
