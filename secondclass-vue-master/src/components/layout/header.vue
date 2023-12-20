@@ -117,14 +117,19 @@ export default {
               img: nav0401,
             },
             {
-              label: "我的课程",
+              label: "我的竞赛",
               code: "self02",
-              img: nav0402,
+              img: nav0403,
             },
             {
-              label: "我的竞赛",
+              label: "我的实践",
               code: "self03",
-              img: nav0403,
+              img: nav0303,
+            },
+            {
+              label: "我的课程",
+              code: "self04",
+              img: nav0402,
             },
           ],
         },
