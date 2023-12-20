@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div :class="['header', { home: isHomePage }]">
     <div class="left">
       <img class="logo" :src="logoImg" alt="" />
       <div class="title">
@@ -52,10 +52,17 @@ export default {
   name: "HeaderBar",
   components: {},
   mounted() {},
+  // 监听,当路由发生变化的时候执行
+  watch: {
+    $route(to, from) {
+      this.isHomePage = to.path.includes("/home");
+    },
+  },
   data() {
     return {
       logoImg,
       titleImg,
+      isHomePage: false,
       arrow,
       activeNav: "home",
       navList: [
@@ -63,22 +70,22 @@ export default {
           label: "首页",
           code: "home",
         },
-        {
-          label: "课程学习",
-          code: "study",
-          children: [
-            {
-              label: "学院资源",
-              code: "study01",
-              img: nav0201,
-            },
-            {
-              label: "实训平台",
-              code: "study02",
-              img: nav0202,
-            },
-          ],
-        },
+        // {
+        //   label: "课程学习",
+        //   code: "study",
+        //   children: [
+        //     {
+        //       label: "学院资源",
+        //       code: "study01",
+        //       img: nav0201,
+        //     },
+        //     {
+        //       label: "实训平台",
+        //       code: "study02",
+        //       img: nav0202,
+        //     },
+        //   ],
+        // },
         {
           label: "信息发布",
           code: "publish",
@@ -101,7 +108,7 @@ export default {
           ],
         },
         {
-          label: "能力自画像",
+          label: "我的学业",
           code: "self",
           children: [
             {
@@ -139,16 +146,25 @@ export default {
 </script>
 <style scoped>
 .header {
+  min-width: 1480px;
   height: 68px;
-  background-color: #581bb7;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px 0 30px;
+  background-color: #581bb7;
+  width: 100%;
+  &.home {
+    position: absolute;
+    top: 0;
+    padding: 0;
+    background-color: transparent;
+  }
   .left {
     display: flex;
     align-items: center;
+    z-index: 10;
     .logo {
+      margin-left: 30px;
       height: 40px;
     }
     .title {
@@ -175,6 +191,7 @@ export default {
   .navigation {
     display: flex;
     height: 100%;
+    margin-right: 40px;
     .nav {
       display: flex;
       height: 100%;
