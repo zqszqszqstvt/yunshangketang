@@ -129,6 +129,7 @@ export default {
       transition: all ease-in-out 1s;
       img {
         width: 100%;
+        min-width: 100%;
       }
     }
     .carousel {
