@@ -7,11 +7,11 @@
       </div>
     </div>
     <div class="navigation">
-      <div
+      <router-link
         v-for="nav in navList"
         :key="nav.code"
-        :class="['nav', { active: activeNav.includes(nav.code) }]"
-        @click="changeNav(nav.code)"
+        class="nav"
+        :to="nav.route"
       >
         {{ nav.label }}
         <img
@@ -21,17 +21,17 @@
           alt=""
         />
         <div v-if="nav.children?.length" class="children">
-          <div
+          <router-link
             v-for="c in nav.children"
             :key="c.label"
             class="child"
-            @click.stop="changeNav(c.code)"
+            :to="c.route"
           >
             <img :src="c.img" alt="" />
             {{ c.label }}
-          </div>
+          </router-link>
         </div>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -40,22 +40,14 @@
 import logoImg from "@/assets/layout/logo.png";
 import titleImg from "@/assets/layout/title.png";
 import arrow from "@/assets/layout/arrow.png";
-import nav0201 from "@/assets/layout/nav0201.png";
-import nav0202 from "@/assets/layout/nav0202.png";
-import nav0301 from "@/assets/layout/nav0301.png";
-import nav0302 from "@/assets/layout/nav0302.png";
-import nav0303 from "@/assets/layout/nav0303.png";
-import nav0401 from "@/assets/layout/nav0401.png";
-import nav0402 from "@/assets/layout/nav0402.png";
-import nav0403 from "@/assets/layout/nav0403.png";
 export default {
   name: "HeaderBar",
   components: {},
   mounted() {},
-  // 监听,当路由发生变化的时候执行
   watch: {
     $route(to, from) {
       this.isHomePage = to.path.includes("/home");
+      console.log(this.$route.matched);
     },
   },
   data() {
@@ -64,91 +56,79 @@ export default {
       titleImg,
       isHomePage: false,
       arrow,
-      activeNav: "home",
       navList: [
         {
           label: "首页",
           code: "home",
+          route: "/"
         },
-        // {
-        //   label: "课程学习",
-        //   code: "study",
-        //   children: [
-        //     {
-        //       label: "学院资源",
-        //       code: "study01",
-        //       img: nav0201,
-        //     },
-        //     {
-        //       label: "实训平台",
-        //       code: "study02",
-        //       img: nav0202,
-        //     },
-        //   ],
-        // },
         {
           label: "信息发布",
           code: "publish",
+          route: "/KaoYanBaoYan",
           children: [
             {
               label: "考研保研",
               code: "publish01",
-              img: nav0301,
+              img: require("@/assets/layout/nav0301.png"),
+              route: "/KaoYanBaoYan"
             },
             {
               label: "竞赛信息",
               code: "publish02",
-              img: nav0302,
+              img: require("@/assets/layout/nav0302.png"),
+              route: "/CompetitionInfo"
             },
             {
               label: "招聘信息",
               code: "publish03",
-              img: nav0303,
+              img: require("@/assets/layout/nav0303.png"),
+              route: "/CompetitionInfo"
             },
           ],
         },
         {
           label: "我的学业",
           code: "self",
+          route: "/ClassScore",
           children: [
             {
               label: "我的成绩",
               code: "self01",
-              img: nav0401,
+              img: require("@/assets/layout/nav0401.png"),
+              route: "/ClassScore"
             },
             {
               label: "我的竞赛",
               code: "self02",
-              img: nav0403,
+              img: require("@/assets/layout/nav0403.png"),
+              route: "/MyCompetition"
             },
             {
               label: "我的实践",
               code: "self03",
-              img: nav0303,
+              img: require("@/assets/layout/nav0303.png"),
+              route: "/MyCompetition"
             },
             {
               label: "我的课程",
               code: "self04",
-              img: nav0402,
+              img: require("@/assets/layout/nav0402.png"),
+              route: "/MyCompetition"
             },
           ],
         },
         {
           label: "登录/注册",
           code: "login",
+          route: "/login"
         },
       ],
     };
   },
-  methods: {
-    changeNav(code) {
-      this.activeNav = code;
-      console.log(code);
-      // todo 页面跳转
-    },
-  },
 };
 </script>
+
 <style scoped>
 .header {
   min-width: 1480px;
@@ -211,6 +191,7 @@ export default {
       margin-left: 60px;
       transition: all ease-in-out 0.3s;
       z-index: 100;
+      text-decoration: none;
       &::after {
         content: none;
         position: absolute;
@@ -229,7 +210,7 @@ export default {
           display: block;
         }
       }
-      &.active {
+      &.router-link-active {
         font-weight: 600;
         &::after {
           content: "";
@@ -261,6 +242,7 @@ export default {
           color: #000000;
           line-height: 22px;
           word-break: keep-all;
+          text-decoration: none;
           img {
             height: 19px;
             margin-right: 9px;
@@ -273,4 +255,5 @@ export default {
     }
   }
 }
+
 </style>
